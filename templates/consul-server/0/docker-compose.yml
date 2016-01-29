@@ -1,0 +1,30 @@
+consul-server:
+  restart: always
+  tty: true
+  ports:
+    - 8300:8300/tcp
+    - 8301:8301/tcp
+    - 8301:8301/udp
+    - 8302:8302/tcp
+    - 8302:8302/udp
+    - 8400:8400/tcp
+    - 8500:8500/tcp
+    - 8600:8600/tcp
+    - 8600:8600/udp
+  command:
+    - bootstrap-expect ${server_count} -retry-join `curl http://rancher-metadata/2015-12-19/self/service/containers/0/primary_ip` -encrypt ${encryption}
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: consul-server-datavolume
+  image: gliderlabs/docker-server:0.6
+  volumes_from:
+    - consul-server-datavolume
+consul-server-datavolume:
+  net: none
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  volumes:
+    - /data
+  entrypoint: /bin/true
+  image: busybox
