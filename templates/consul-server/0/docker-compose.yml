@@ -11,8 +11,7 @@ consul-server:
     - 8500:8500/tcp
     - 8600:8600/tcp
     - 8600:8600/udp
-  command:
-    - [-bootstrap-expect=${server_count}, -retry-join="`curl http://rancher-metadata/2015-12-19/self/service/containers/0/primary_ip`", -encrypt="${encryption}"]
+  command: -bootstrap-expect=${server_count} -retry-join="`curl http://rancher-metadata/2015-12-19/self/service/containers/0/primary_ip`" -encrypt="${encryption}"
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.sidekicks: consul-server-datavolume
