@@ -19,6 +19,8 @@ consul-server:
   image: pk4media/consul-server:0.6
   volumes_from:
     - consul-server-datavolume
+  environment:
+    SERVER_COUNT: ${server_count}
 consul-server-datavolume:
   net: none
   labels:
