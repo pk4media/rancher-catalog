@@ -2,35 +2,23 @@ consul-server:
   restart: always
   tty: true
   ports:
-    - 8300:8300/tcp
-    - 8301:8301/tcp
+    - 8300:8300
+    - 8301:8301
     - 8301:8301/udp
-    - 8302:8302/tcp
+    - 8302:8302
     - 8302:8302/udp
-    - 8400:8400/tcp
-    - 8500:8500/tcp
-    - 8600:8600/tcp
+    - 8400:8400
+    - 8500:8500
+    - 8600:8600
     - 8600:8600/udp
-  entrypoint: /opt/rancher/bin/entrypoint.sh
   command: -bootstrap-expect=${server_count} -encrypt="${encryption}"
   labels:
     io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: consul-server-base, consul-server-datavolume
+    io.rancher.sidekicks: consul-server-datavolume
     io.rancher.scheduler.affinity:host_label_soft: service=consul
-  image: gliderlabs/consul-server:0.6
+  image: pk4media/consul-server:0.6
   volumes_from:
     - consul-server-datavolume
-    - consul-server-base
-consul-server-base:
-  restart: always
-  net: none
-  tty: true
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-  image: pk4media/consul-server-config:0.6
-  stdin_open: true
-  entrypoint: /bin/true
 consul-server-datavolume:
   net: none
   labels:
