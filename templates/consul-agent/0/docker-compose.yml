@@ -19,7 +19,7 @@ consul-agent:
   volumes_from:
     - consul-agent-datavolume
   external_links:
-    - consul-server/consul-server:consul-server
+    - ${consul_server_service}:consul-server
 consul-agent-datavolume:
   net: none
   labels:
