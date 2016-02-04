@@ -12,5 +12,11 @@
       type: "int"
       required: true
       default: 3
+    - variable: consul_agent_service
+      description: Consul Agent service name
+      label: Consul Agent Service
+      type: string
+      required: true
+      default: consul-agent/consul-agent
 vault:
   scale: ${server_count}
