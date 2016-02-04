@@ -23,5 +23,13 @@
       type: "string"
       required: true
       default: dc1
+    - variable: host_label_type
+      description: Host Label Preference Type
+      label: Host Label Type
+      type: enum
+      options:
+        - host_label
+        - host_label_soft
+      default: host_label_soft
 consul-server:
   scale: ${server_count}
