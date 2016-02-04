@@ -18,6 +18,8 @@ consul-agent:
   image: pk4media/consul-agent:0.6
   volumes_from:
     - consul-agent-datavolume
+  external_links:
+    - consul-server/consul-server:consul-server
 consul-agent-datavolume:
   net: none
   labels:
