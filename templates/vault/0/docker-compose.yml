@@ -8,6 +8,6 @@ vault:
     io.rancher.container.hostname_override: container_name
     io.rancher.scheduler.affinity:host_label_soft: service=vault
     io.rancher.container.pull_image: always
-  image: sjourdan/vault:latest
+  image: pk4media/vault:0.4
   links:
     - consul-agent
